@@ -7,6 +7,7 @@ import products from "../models";
 import { useSearchParams, Link, Navigate } from "react-router-dom";
 import Loading from "./Loading";
 import { CountContexts } from "../Component/Contexts";
+import { range } from "lodash";
 
 const ProductListPage: FC<any> = () => {
   const [product, setProduct] = useState<{
@@ -22,7 +23,7 @@ const ProductListPage: FC<any> = () => {
 
   let { query, sort } = param;
 
-  let page: number = Number(param.page);
+  let page = Number(param.page);
 
   query = query || "";
   page = page || 1;
@@ -98,16 +99,16 @@ const ProductListPage: FC<any> = () => {
       </div>
       <div className="flex gap-1 py-3 px-5 lg:ml-28">
         {product &&
-          [...Array(product.meta.last_page).keys()].map((item: number) => (
+          range(1, product.meta.last_page + 1).map((item?: any) => (
             <Link
               className={
                 " py-2 px-3 text-white rounded-none " +
-                (page == item + 1 ? "bg-black" : "bg-green-600")
+                (page == item ? "bg-black" : "bg-green-600")
               }
-              to={"?" + new URLSearchParams({ ...param, page: item + 1 })}
+              to={"?" + new URLSearchParams({ ...param, page: item })}
               key={item}
             >
-              {item + 1}
+              {item}
             </Link>
           ))}
       </div>
