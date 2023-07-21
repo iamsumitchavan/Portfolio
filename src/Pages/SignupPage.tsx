@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { useFormik, Form } from "formik";
+import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -17,7 +17,7 @@ function SignupPage() {
         password: values.password,
       })
       .then((response) => {
-        const { user, token } = response.data;
+        const { token } = response.data;
 
         localStorage.setItem("token", token);
       });

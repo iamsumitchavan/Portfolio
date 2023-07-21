@@ -6,7 +6,7 @@ import ProductDetailPage from "./Pages/ProductDetailPage";
 import { useState, useEffect } from "react";
 import { CountContexts } from "./Component/Contexts";
 import CartPage from "./Pages/CartPage";
-import CheckOutPage from "./Pages/CheckOutPage";
+
 import Login from "./Pages/Login";
 import axios from "axios";
 import SignupPage from "./Pages/SignupPage";
@@ -59,7 +59,7 @@ function App() {
             <Route index element={<ProductListPage />} />
             <Route path="/:id" element={<ProductDetailPage />} />
             <Route path="/cart" element={<CartPage />} />
-            <Route path="/checkoutPage" element={<CheckOutPage />} />
+
             <Route path="/signup" element={<SignupPage />} />
           </Routes>
         </CountContexts.Provider>
