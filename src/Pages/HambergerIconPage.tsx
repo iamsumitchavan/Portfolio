@@ -1,13 +1,11 @@
-import { Navigate } from "react-router-dom";
-import { CountContexts } from "../Component/Contexts";
-import { useContext } from "react";
+import WithUser from "../Component/WithUser";
+import { FC, memo } from "react";
 
-const HambergerIconPage = () => {
-  const { setUser, user } = useContext(CountContexts);
+type HambergerIconPageProps = {
+  setUser: (args: any) => void;
+};
 
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
+const HambergerIconPage: FC<HambergerIconPageProps> = ({ setUser }) => {
   return (
     <div>
       <div className=" absolute origin-left duration-5000 flex justify-center flex-col gap-6 items-center h-screen bg-black w-full  ">
@@ -36,4 +34,4 @@ const HambergerIconPage = () => {
   );
 };
 
-export default HambergerIconPage;
+export default WithUser(memo(HambergerIconPage));

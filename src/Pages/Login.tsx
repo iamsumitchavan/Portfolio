@@ -6,12 +6,12 @@ import { memo } from "react";
 import HOCInput from "../Component/Input";
 import axios from "axios";
 import { CountContexts } from "../Component/Contexts";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type LoginPageProps = {};
 
 const Login: FC<LoginPageProps> = ({}) => {
-  const { setUser, user } = useContext(CountContexts);
+  const { setUser } = useContext(CountContexts);
   const handleCodeyogi = async (values: {
     email: string;
     password: string;
@@ -24,13 +24,12 @@ const Login: FC<LoginPageProps> = ({}) => {
       .then((response) => {
         console.log("response is ", response);
         const { token, user } = response.data;
+        localStorage.setItem("user", user);
         setUser(user);
 
         localStorage.setItem("token", token);
       })
-      .catch(() => {
-        console.log("kuchh to error aa gaya hai");
-      });
+      .catch(() => {});
   };
   const schema = Yup.object().shape({
     email: Yup.string().email().required(),
@@ -41,9 +40,6 @@ const Login: FC<LoginPageProps> = ({}) => {
     password: "",
   };
 
-  if (user) {
-    return <Navigate to="/" />;
-  }
   return (
     <div
       className="

@@ -27,7 +27,7 @@ const NavBar: FC<NavBarProps> = ({ count }) => {
         <div className=" sm:px-32 lg:px-8 flex relative ">
           <Link to="/cart" className="sm:p-2">
             <BsHandbag className="text-4xl text-black relative  lg:left-2 " />
-            <span className="absolute top-3 left-3 right-7 sm:right-6 sm:top-6 sm:px-28 lg:px-4 lg:relative lg:left-1 lg:-top-6   ">
+            <span className="absolute top-3 left-3 right-7 sm:right-7 sm:top-6 sm:px-28 lg:px-4 lg:relative lg:left-1 lg:-top-6   ">
               {count}
             </span>
           </Link>

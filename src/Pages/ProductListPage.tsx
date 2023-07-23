@@ -1,12 +1,12 @@
 import { getProductList } from "../Component/Api";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 
 import { useState } from "react";
 import Product from "./Product";
 import products from "../models";
-import { useSearchParams, Link, Navigate } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import Loading from "./Loading";
-import { CountContexts } from "../Component/Contexts";
+
 import { range } from "lodash";
 
 const ProductListPage = () => {
@@ -14,7 +14,7 @@ const ProductListPage = () => {
     meta: { last_page: number };
     data: [];
   }>();
-  const { user } = useContext(CountContexts);
+
   let [searchParams, setSearchParams] = useSearchParams();
 
   const param = Object.fromEntries([...searchParams]);
@@ -58,10 +58,6 @@ const ProductListPage = () => {
     return <Loading />;
   }
 
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
-
   return (
     <div className="">
       <div className="py-3 shadow-sm flex justify-between  ">
@@ -69,7 +65,7 @@ const ProductListPage = () => {
           Products
         </h1>
         <div className="sm:px-32">
-          <div className="sm:px-5 flex sm:w-80 lg:px-5 lg:gap-1 sm:justify-start">
+          <div className="sm:px-5 flex sm:w-80 lg:px-5 lg:gap-1 sm:justify-start lg:ml-28">
             <input
               placeholder="search Products here"
               onChange={handleQueryChange}
@@ -90,12 +86,13 @@ const ProductListPage = () => {
       </div>
       <div className="lg:px-20 ">
         <div className=" flex justify-center flex-col items-center object-cover py-5 gap-4 lg:flex-row lg:flex-wrap lg:gap-8 ">
+          {product.data.length == 0 && <div>invalid search</div>}
           {product.data.map((p: products) => (
             <Product key={p.id} {...p} />
           ))}
         </div>
       </div>
-      <div className=" flex gap-1 py-3 px-5 lg:ml-28">
+      <div className=" flex justify-start items-start gap-1 py-3 px-5 lg:ml-28">
         {product &&
           range(1, product.meta.last_page + 1).map((item?: any) => (
             <Link
