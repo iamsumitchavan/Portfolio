@@ -25,6 +25,7 @@ const Login: FC<LoginPageProps> = ({}) => {
         console.log("response is ", response);
         const { token, user } = response.data;
         setUser(user);
+
         localStorage.setItem("token", token);
       })
       .catch(() => {
@@ -44,21 +45,41 @@ const Login: FC<LoginPageProps> = ({}) => {
     return <Navigate to="/" />;
   }
   return (
-    <div className="lg:flex lg:h-screen lg:flex-col lg:justify-center lg:items-center py-2">
+    <div
+      className="
+    lg:flex
+    lg:h-screen
+    lg:flex-col
+    lg:justify-center
+    lg:items-center
+    py-2
+    flex
+    flex-col
+    justify-center
+    items-center
+    h-screen
+    fixed
+    right-0
+    top-0
+    left-0
+    bottom-0"
+    >
       <Formik
         initialValues={initialValues}
         onSubmit={handleCodeyogi}
         validationSchema={schema}
       >
-        <Form className="p-20 md:shadow-md md: outline-slate-300 object-cover  ">
+        <Form className="md:p-20 md:shadow-md md: outline-slate-300 object-cover px-20 ">
           <div className="py-5 ">
-            <h1 className="text-black font-bold text-4xl">Log In Page </h1>
+            <h1 className="text-black font-bold text-4xl text-center">
+              Log In Page
+            </h1>
           </div>
           <div>
             <HOCInput
               label="email"
               id="email"
-              className="cursor-pointer shadow rounded-lg appearance-none focus:bg-white focus:outline-none border-2 md:rounded w-80 md:py-2 py-4 px-3 text-gray-700 leading-tight focus:border-purple-500"
+              className="cursor-pointer shadow rounded-lg appearance-none focus:bg-white focus:outline-none border-2 md:rounded sm:w-80 w-72 md:py-2 py-3 px-3 text-gray-700 leading-tight focus:border-purple-500"
               placeholder="Enter Email"
               name="email"
               type="email"
@@ -68,15 +89,15 @@ const Login: FC<LoginPageProps> = ({}) => {
             <HOCInput
               label="password"
               id="password"
-              className="cursor-pointer shadow rounded-lg appearance-none focus:bg-white focus:outline-none border-2 md:rounded w-80 md:py-2 py-4 px-3 text-gray-700 leading-tight focus:border-purple-500"
+              className="cursor-pointer shadow rounded-lg appearance-none focus:bg-white focus:outline-none border-2 md:rounded sm:w-80 w-72 md:py-2 py-3 px-3 text-gray-700 leading-tight focus:border-purple-500"
               placeholder="Enter password"
               name="password"
               type="password"
             />
           </div>
-          <div className="py-2 lg:flex lg:flex-col lg:items-end lg:justify-end">
+          <div className="py-2  md:flex md:flex-col md:items-end md:justify-end ">
             <Button title="login" />
-            <p className="py-5">
+            <p className="py-5 ">
               Don’t have an account yet?
               <Link
                 to="/signup"
@@ -88,7 +109,7 @@ const Login: FC<LoginPageProps> = ({}) => {
           </div>
         </Form>
       </Formik>
-      <div className="flex justify-center shadow-xl py-5 font-display px-3 rounded-md">
+      <div className="flex justify-center shadow-xl py-5 font-display px-8 border border-black text-white bg-black md:rounded-md rounded-sm ">
         temperory username and password is username : sumit121@gmail.com
         password: 12345678
       </div>

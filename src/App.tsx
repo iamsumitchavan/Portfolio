@@ -10,6 +10,7 @@ import CartPage from "./Pages/CartPage";
 import Login from "./Pages/Login";
 import axios from "axios";
 import SignupPage from "./Pages/SignupPage";
+import HambergerIconPage from "./Pages/HambergerIconPage";
 
 function App() {
   const savedData = localStorage.getItem("my-cart")!;
@@ -59,7 +60,7 @@ function App() {
             <Route index element={<ProductListPage />} />
             <Route path="/:id" element={<ProductDetailPage />} />
             <Route path="/cart" element={<CartPage />} />
-
+            <Route path="/hmbergerIconpage" element={<HambergerIconPage />} />
             <Route path="/signup" element={<SignupPage />} />
           </Routes>
         </CountContexts.Provider>

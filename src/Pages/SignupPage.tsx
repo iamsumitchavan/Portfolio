@@ -1,7 +1,9 @@
 import * as Yup from "yup";
-import { useFormik } from "formik";
+import { Formik, Form } from "formik";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import HOCInput from "../Component/Input";
+import Button from "../Component/Button";
 
 function SignupPage() {
   const handleSubmitSignupForm = (values: {
@@ -33,112 +35,80 @@ function SignupPage() {
     ),
   });
 
-  const {
-    handleBlur,
-    handleChange,
-    handleSubmit,
+  const initialValues = {
+    full_name: "",
+    email: "",
+    password: "",
+    confirm_password: "",
+  };
 
-    values,
-    errors,
-    touched,
-  } = useFormik({
-    initialValues: {
-      full_name: "",
-      email: "",
-      password: "",
-      confirm_password: "",
-    },
-    validationSchema: schema,
-    onSubmit: handleSubmitSignupForm,
-  });
   return (
     <>
-      <div className="flex h-screen justify-center items-center ">
-        <form onSubmit={handleSubmit} className="p-20 shadow-xl">
-          <div className="flex justify-center">
-            <h1 className="text-2xl font-bold py-4 ">Sign Up Page</h1>
-          </div>
-          <div className="py-3 flex flex-col">
-            <label className="sr-only" htmlFor="fullname">
-              fullname
-            </label>
-            <input
-              placeholder="fullname"
-              autoComplete="name"
-              id="fullname"
-              name="full_name"
-              className="border border-black p-2 w-64 rounded-lg"
-              type="text"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.full_name}
-            />
-            {touched.full_name && errors && <span>{errors.full_name}</span>}
-          </div>
-          <div className="py-3 flex flex-col">
-            <label className="sr-only" htmlFor="email">
-              email
-            </label>
-            <input
-              placeholder="email"
-              autoComplete="email"
-              id="email"
-              name="email"
-              className="border border-black p-2 w-64 rounded-lg"
-              type="email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-            />
-            {touched.email && errors && <span>{errors.email}</span>}
-          </div>
+      <div className="lg:flex lg:h-screen lg:flex-col lg:justify-center lg:items-center py-2 flex flex-col justify-center items-center h-screen fixed right-0 top-0 left-0 bottom-0 ">
+        <Formik
+          initialValues={initialValues}
+          validationSchema={schema}
+          onSubmit={handleSubmitSignupForm}
+        >
+          <Form className="md:p-20 md:shadow-md md: outline-slate-300 object-cover px-20 ">
+            <div className="py-5">
+              <h1 className="text-black font-bold text-4xl text-center ">
+                Sign Up Page
+              </h1>
+            </div>
+            <div className="py-3 flex flex-col">
+              <HOCInput
+                label="fullname"
+                placeholder="fullname"
+                id="fullname"
+                name="full_name"
+                className="cursor-pointer shadow rounded-lg appearance-none focus:bg-white focus:outline-none border-2 md:rounded sm:w-80 w-72 md:py-2 py-3 px-3 text-gray-700 leading-tight focus:border-purple-500"
+                type="text"
+              />
+            </div>
+            <div className="py-3 flex flex-col">
+              <HOCInput
+                placeholder="email"
+                label="email"
+                id="email"
+                name="email"
+                className="cursor-pointer shadow rounded-lg appearance-none focus:bg-white focus:outline-none border-2 md:rounded sm:w-80 w-72 md:py-2 py-3 px-3 text-gray-700 leading-tight focus:border-purple-500"
+                type="email"
+              />
+            </div>
 
-          <div className="py-3 flex flex-col">
-            <label className="sr-only" htmlFor="password">
-              password
-            </label>
-            <input
-              placeholder="password"
-              autoComplete="password"
-              id="password"
-              name="password"
-              className="border border-black p-2 w-64 rounded-lg"
-              type="password"
-            />
-            {touched.password && errors && <span>{errors.password}</span>}
-          </div>
-          <div className="py-3 flex flex-col">
-            <label className="sr-only" htmlFor="confirm_password">
-              confirmpassowrd
-            </label>
-            <input
-              placeholder="password"
-              autoComplete="password"
-              id="confirm_password"
-              name="confirm_password"
-              className="border border-black p-2 w-64 rounded-lg"
-              type="password"
-            />
-            {touched.confirm_password && errors && (
-              <span>{errors.confirm_password}</span>
-            )}
-          </div>
-          <div className="flex flex-col gap-4 items-center ">
-            <button
-              className="bg-indigo-700 text-white p-2 w-52 rounded-lg"
-              type="submit"
-            >
-              signin
-            </button>
-          </div>
-          <div className="flex space-x-4">
-            <Link to="/login">
-              <p className="text-sm font-bold text-indigo-700">
-                already sign in ?
-              </p>
-            </Link>
-          </div>
-        </form>
+            <div className="py-3 flex flex-col">
+              <HOCInput
+                label="password"
+                placeholder="password"
+                id="password"
+                name="password"
+                className="cursor-pointer shadow rounded-lg appearance-none focus:bg-white focus:outline-none border-2 md:rounded sm:w-80 w-72 md:py-2 py-3 px-3 text-gray-700 leading-tight focus:border-purple-500"
+                type="password"
+              />
+            </div>
+            <div className="py-3 flex flex-col">
+              <HOCInput
+                label="confirmpassowrd"
+                placeholder="password"
+                id="confirm_password"
+                name="confirm_password"
+                className="cursor-pointer shadow rounded-lg appearance-none focus:bg-white focus:outline-none border-2 md:rounded sm:w-80 w-72 md:py-2 py-3 px-3 text-gray-700 leading-tight focus:border-purple-500"
+                type="password"
+              />
+            </div>
+            <div className="py-2  md:flex md:flex-col md:justify-end md:items-end  ">
+              <Button title="sign up" />
+            </div>
+            <div className="flex space-x-4 justify-end">
+              <Link to="/login">
+                <p className="text-sm font-bold text-indigo-700">
+                  already sign in ?
+                </p>
+              </Link>
+            </div>
+          </Form>
+        </Formik>
       </div>
     </>
   );
